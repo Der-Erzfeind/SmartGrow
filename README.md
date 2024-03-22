@@ -1,0 +1,2 @@
+# SmartGrow
+Projektarbeit THN
