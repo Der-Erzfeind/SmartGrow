@@ -1,0 +1,3 @@
+[submodule "Plantrecognition"]
+	path = Plantrecognition
+	url = https://github.com/reschma/Plantrecognition.git
