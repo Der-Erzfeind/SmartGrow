@@ -1,3 +1,7 @@
-[submodule "esp32_miflora"]
+[submodule "Plantrecognition"]
+	path = Plantrecognition
+	url = https://github.com/reschma/Plantrecognition.git
+
+	[submodule "esp32_miflora"]
 	path = esp32_miflora
 	url = https://github.com/Der-Erzfeind/miflora-esp32.git
