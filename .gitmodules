@@ -5,3 +5,7 @@
 	[submodule "esp32_miflora"]
 	path = esp32_miflora
 	url = https://github.com/Der-Erzfeind/miflora-esp32.git
+
+[submodule "control_sys"]
+	path = control_sys
+	url = https://github.com/Der-Erzfeind/control_sys
