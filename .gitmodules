@@ -5,3 +5,6 @@
 [submodule "control_sys"]
 	path = control_sys
 	url = https://github.com/Der-Erzfeind/control_sys
+[submodule "Plantrecognition_Smartgrow"]
+	path = Plantrecognition_Smartgrow
+	url = https://github.com/reschma/Plantrecognition_Smartgrow.git
