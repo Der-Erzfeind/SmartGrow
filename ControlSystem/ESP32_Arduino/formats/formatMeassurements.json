@@ -1,0 +1,36 @@
+{
+    "Mac": "G5:4D",
+    "volmix": 60,
+    "volwater": 20,
+    "volfertilizer": 60,
+    "volacid": 60,
+    "sensors": [
+        {
+            "Mac": "1",
+            "temperature": 27.5,
+            "ph": 7.5,
+            "moisture": 60,
+            "light": 350,
+            "conductivity": 2000,
+            "battery": 100
+        },
+        {
+            "Mac": "1",
+            "temperature": 27.5,
+            "ph": 7.5,
+            "moisture": 60,
+            "light": 350,
+            "conductivity": 2000,
+            "battery": 100
+        },
+        {
+            "Mac": "1",
+            "temperature": 27.5,
+            "ph": 7.5,
+            "moisture": 60,
+            "light": 350,
+            "conductivity": 2000,
+            "battery": 100
+        }
+    ]
+}

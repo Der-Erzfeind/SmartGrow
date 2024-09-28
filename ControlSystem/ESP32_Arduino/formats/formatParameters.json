@@ -1,0 +1,32 @@
+[
+    {
+        "Mac": "1",
+        "Pot": 1,
+        "MinMoisture": 15,
+        "MaxMoisture": 60,
+        "MinConductivity": 350,
+        "MaxConductivity": 2000,
+        "MinPh": 6.0,
+        "MaxPh": 7.5
+    },
+    {
+        "Mac": "2",
+        "Pot": 2,
+        "MinMoisture": 15,
+        "MaxMoisture": 60,
+        "MinConductivity": 350,
+        "MaxConductivity": 2000,
+        "MinPh": 6.0,
+        "MaxPh": 7.5
+    },
+    {
+        "Mac": "3",
+        "Pot": 3,
+        "MinMoisture": 15,
+        "MaxMoisture": 60,
+        "MinConductivity": 350,
+        "MaxConductivity": 2000,
+        "MinPh": 6.0,
+        "MaxPh": 7.5
+    }
+]
