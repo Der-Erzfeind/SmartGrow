@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="static/css/dashboard_styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to Your Dashboard</h1>
+        <div class="header-right">
+            <button id="status-button">Status</button>
+            <div id="service-status-popup" class="popup">
+                <div class="popup-content">
+                    <span class="close-popup">&times;</span>
+                    <h2>Service Information</h2>
+                    <div id="service-status-content">
+                        <ul>
+                            {% for service, status in statuses.items() %}
+                            <li>{{ service }}: {{ status }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <!-- Display selected boxes -->
+        {% if boxes %}
+        <div class="list-container">
+            <section id="boxes">
+                <h2>Your Boxes:</h2>
+                {% for box in boxes %}
+                <article class="box">
+                    <div class="box-info">
+                        <h3>
+                            <form action="{{ url_for('box_details', box_id=box['boxID']) }}">
+                                <button type="submit" class="box-button">Box ID: {{ box['boxID'] }}</button>
+                            </form>
+                        </h3>                        
+                        {% if box_plants[box['boxID']] %}
+                        <section class="plants">
+                            <ul>
+                                {% for plant in box_plants[box['boxID']] %}
+                                <li>
+                                    <a href="{{ url_for('plantview', plant_sensor=plant['SensorMAC']) }}">{{ plant['Plantname'] }}</a>
+
+                                    <form action="{{ url_for('delete_plant') }}" method="post" style="display:inline;">
+                                        <input type="hidden" name="plant_name" value="{{ plant['Plantname'] }}">
+                                        <input type="hidden" name="sensor_mac" value="{{ plant['SensorMAC'] }}">
+                                        <input type="hidden" name="box_id" value="{{ box['boxID'] }}">
+                                        <button type="submit" class="remove-plant">Remove Plant</button>
+                                    </form>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </section>
+                        {% else %}
+                        <p>This box has no plants yet.</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="box-form">
+                        {% if box_sensors[box['boxID']] %}
+                        <section class="form-group">
+                            <form action="{{ url_for('add_plant') }}" method="post">
+                                <h4>Add a Plant to This Box:</h4>
+                                <label for="plant_name_{{ box['boxID'] }}">Plant Name:</label>
+                                <input type="text" id="plant_name_{{ box['boxID'] }}" name="plant_name" required>
+
+                                <label for="pid_{{ box['boxID'] }}">Plant ID (pid):</label>
+                                <select id="pid_{{ box['boxID'] }}" name="pid" required>
+                                    {% for plant_info in plants_information %}
+                                    <option value="{{ plant_info['pid'] }}">{{ plant_info['pid'] }}</option>
+                                    {% endfor %}
+                                </select>
+
+                                <label for="sensor_mac_{{ box['boxID'] }}">Select Sensor:</label>
+                                <select id="sensor_mac_{{ box['boxID'] }}" name="sensor_mac" required>
+                                    {% for sensor in box_sensors[box['boxID']] %}
+                                    <option value="{{ sensor['SensorMAC'] }}">Sensor MAC: {{ sensor['SensorMAC'] }}</option>
+                                    {% endfor %}
+                                </select>
+
+                                <input type="hidden" name="box_id" value="{{ box['boxID'] }}">
+                                <button type="submit">Add Plant</button>
+                            </form>
+
+                            <form action="{{ url_for('upload_photo') }}" method="post" enctype="multipart/form-data">
+                                <h4>Upload a Photo for This Box:</h4>
+                                <input type="file" name="photo" accept="image/*" required>
+                                <input type="hidden" name="box_id" value="{{ box['boxID'] }}">
+                                <button type="submit">Upload Photo</button>
+                            </form>
+                        </section>
+                        {% else %}
+                        <p>No sensors available for this box. Cannot add plants.</p>
+                        {% endif %}
+
+                        <form action="{{ url_for('delete_box') }}" method="post">
+                            <input type="hidden" name="box_id" value="{{ box['boxID'] }}">
+                            <button type="submit" class="remove-box">Remove Box</button>
+                        </form>
+                    </div>
+                </article>
+                {% endfor %}
+            </section>
+        </div>
+        {% else %}
+        <p>You don't have any boxes yet. Please add a box.</p>
+        {% endif %}
+
+        {% if available_boxes %}
+        <div class="input-container">
+            <section id="add-box">
+                <h2>Add Box:</h2>
+                <form action="{{ url_for('add_or_select_box') }}" method="post">
+                    <label for="box_id">Add Box:</label>
+                    <select id="box_id" name="box_id" required>
+                        {% for available_box in available_boxes %}
+                        <option value="{{ available_box['boxID'] }}">{{ available_box['boxID'] }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
+        </div>
+        {% else %}
+        <p>No available boxes to add. Please buy a new one.</p>
+        {% endif %}
+    </main>
+
+    <script src="static/js/dashboard_scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+[Unit]
+Description=MQTT Skript
+After=network.target
+
+[Service]
+ExecStart=/bin/bash -c 'source /var/www/smartgrow_app/webpage/.venv/bin/activate && python3 -u /var/www/smartgrow_app/webpage/WebApp/Skripts/mqtt_communication.py'
+SyslogIdentifier=mqtt_communication
+WorkingDirectory=/var/www/smartgrow_app/webpage/WebApp/Skripts
+Restart=always
+User=smartgrow
+Group=smartgrow
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

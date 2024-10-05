@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartGrow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index_styles.css') }}">
+    <script src="{{ url_for('static', filename='js/index_scripts.js') }}" defer></script>
+</head>
+<body>
+    <div class="content">
+        <h1 class="main-heading">Welcome to SmartGrow</h1>
+        <p style="text-align: center; margin-top: 20px;">
+            <a href="#" onclick="openModal('loginModal')">Login</a> |
+            <a href="#" onclick="openModal('registerModal')">Register</a>
+        </p>
+        <div class="team-section">
+            <h2>The Team</h2>
+            <div class="team-images">
+                <img src="{{ url_for('static', filename='images/tm2.JPEG') }}" alt="Team Member 1">
+                <img src="{{ url_for('static', filename='images/tm3.JPEG') }}" alt="Team Member 2">
+                <img src="{{ url_for('static', filename='images/tm1.JPEG') }}" alt="Team Member 3">
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form action="/login" method="post" onsubmit="handleLogin(event)">
+                <label for="username_login">Username:</label>
+                <input type="text" id="username_login" name="username" required><br><br>
+                <label for="password_login">Password:</label>
+                <input type="password" id="password_login" name="password" required><br><br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Register</h2>
+            <form action="/register" method="post" onsubmit="handleRegister(event)">
+                <label for="username_register">Username:</label>
+                <input type="text" id="username_register" name="username" required><br><br>
+                <label for="password_register">Password:</label>
+                <input type="password" id="password_register" name="password" required><br><br>
+                <label for="confirm_password_register">Confirm Password:</label>
+                <input type="password" id="confirm_password_register" name="confirm_password" required><br><br>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

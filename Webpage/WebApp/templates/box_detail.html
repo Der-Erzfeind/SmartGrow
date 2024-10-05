@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/box_details_styles.css') }}">
+</head>
+
+<body>
+    <header>
+        <h1>Box {{ box_id }}</h1>
+        <div class="links">
+            <a href="{{ url_for('dashboard') }}">&#x276E;</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <section class="plants-section">
+            <h2>Plants in this Box:</h2>
+            {% if plants %}
+            <ul>
+                {% for plant in plants %}
+                <li>
+                    <a href="{{ url_for('plantview', plant_sensor=plant['SensorMAC']) }}">
+                        <div class="plant-details">
+                            <span class="plant-info">{{ plant['Plantname'] }} - Sensor: {{ plant['SensorMAC'] }}</span>
+                            <div class="info-container">
+                                <span class="sensor-info">Pot Number: {{ pot_assignments[plant['SensorMAC']] if
+                                    pot_assignments[plant['SensorMAC']] is not none else 'N/A' }}</span>
+                                <span class="battery-info">Battery: {{ plant_battery_info[plant['SensorMAC']] if
+                                    plant_battery_info[plant['SensorMAC']] is not none else 'N/A' }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No plants in this box yet.</p>
+            {% endif %}
+        </section>
+
+        <section class="water-tank-section">
+            <h2>Water Tank Status:</h2>
+            <div class="water-tank-info">
+                {% if water_tank %}
+                <p>Last updated: {{ water_tank['time'] }}</p>
+                <ul>
+                    <li>Volume Mix: {{ water_tank['volume_mix'] }} ml</li>
+                    <li>Volume Water: {{ water_tank['volume_water'] }} ml</li>
+                    <li>Volume Fertilizer: {{ water_tank['volume_fertilizer'] }} ml</li>
+                    <li>Volume Acid: {{ water_tank['volume_acid'] }} ml</li>
+                </ul>
+                {% else %}
+                <p>No water tank data available.</p>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/box_details_scripts.js') }}"></script>
+</body>
+
+</html>

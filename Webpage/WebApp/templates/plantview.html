@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant View</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/plantview_styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ plant['Plantname'] }}</h1>
+            <div class="links">
+                <a href="{{ url_for('dashboard') }}">&#x276E;</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </header>
+
+        <!-- Plant Image -->
+        <figure class="plant-figure">
+            <img src="{{ url_for('static', filename='images/' + plant['pid'] + '.jpg') }}"
+                alt="Image of {{ plant['pid'] }}" class="plant-image">
+        </figure>
+
+        <!-- Centered Plant Information -->
+        <div class="info-container">
+            <button class="toggle-info">Plant Information</button>
+            <div class="plant-info collapsed">
+                <ul>
+                    <li><strong>Origin:</strong> {{ plant_info['origin'] }}</li>
+                    <li><strong>Blooming:</strong> {{ plant_info['blooming'] }}</li>
+                    <li><strong>Color:</strong> {{ plant_info['color'] }}</li>
+                    <li><strong>Size:</strong> {{ plant_info['size'] }}</li>
+                    <li><strong>Soil:</strong> {{ plant_info['soil'] }}</li>
+                    <li><strong>Sunlight:</strong> {{ plant_info['sunlight'] }}</li>
+                    <li><strong>Watering:</strong> {{ plant_info['watering'] }}</li>
+                    <li><strong>Fertilization:</strong> {{ plant_info['fertilization'] }}</li>
+                    <li><strong>Pruning:</strong> {{ plant_info['pruning'] }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Grafana Dashboards -->
+        <div class="graph-container">
+            <div class="iframe-container">
+                <iframe src="http://192.168.0.78:3000/d-solo/advi5em73o5c0a/smartgrow-grafana-dashboard?orgId=1&theme=light&panelId=2&var-sensorID={{ plant['SensorMAC'] }}&var-pid={{ plant['pid'] }}"></iframe>
+                <iframe src="http://192.168.0.78:3000/d-solo/advi5em73o5c0a/smartgrow-grafana-dashboard?orgId=1&theme=light&panelId=3&var-sensorID={{ plant['SensorMAC'] }}&var-pid={{ plant['pid'] }}"></iframe>
+                <iframe src="http://192.168.0.78:3000/d-solo/advi5em73o5c0a/smartgrow-grafana-dashboard?orgId=1&theme=light&panelId=4&var-sensorID={{ plant['SensorMAC'] }}&var-pid={{ plant['pid'] }}"></iframe>
+                <iframe src="http://192.168.0.78:3000/d-solo/advi5em73o5c0a/smartgrow-grafana-dashboard?orgId=1&theme=light&panelId=5&var-sensorID={{ plant['SensorMAC'] }}&var-pid={{ plant['pid'] }}"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/plantview_scripts.js') }}"></script>
+</body>
+</html>

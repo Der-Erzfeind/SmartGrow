@@ -1,0 +1,18 @@
+[Unit]
+Description=Plantrecognition Skript
+After=network.target
+
+[Service]
+ExecStart=/bin/bash -c 'source /home/smartgrow/PlantRecognition/plantrecog-env/bin/activate && python3 -u /home/smartgrow/PlantRecognition/plant_Recog.py'
+SyslogIdentifier=plant_recog
+WorkingDirectory=/home/smartgrow/PlantRecognition
+Restart=always
+User=smartgrow
+group=smartgrow
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+
