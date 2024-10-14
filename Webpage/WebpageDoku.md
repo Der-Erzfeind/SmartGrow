@@ -300,7 +300,7 @@ Auf der Startseite gibt es auch einen Abschnitt, der das Team hinter der Anwendu
 
 **Dashboard Übersicht**
 
-Das Dashboard bietet dem Benutzer eine zentrale Anlaufstelle, um seine Boxen zu verwalten. Der Benutzer hat verschiedene Möglichkeiten, Boxen hinzuzufügen, zu konfigurieren und zu entfernen sowie Pflanzen in den Boxen zu verwalten. Zudem gibt es eine Statusübersicht, die anzeigt, ob die MQTT- und KI-Modelle aktiv sind.
+Das Dashboard bietet dem Benutzer eine zentrale Anlaufstelle, um seine Boxen zu verwalten. Der Benutzer hat verschiedene Möglichkeiten, Boxen hinzuzufügen, zu konfigurieren und zu entfernen sowie Pflanzen in den Boxen zu verwalten. Zudem gibt es eine Statusübersicht, die anzeigt, ob die Services für die MQTT-Komminkation, das Pflanzenerkennungs-Modell und den Grafana-Server aktiv sind.
 
 **Boxen hinzufügen und entfernen**
 
