@@ -319,10 +319,10 @@ Das Dashboard bietet dem Benutzer eine zentrale Anlaufstelle, um seine Boxen zu 
 - Der Benutzer kann auf die „Box ID“ klicken, um zu den Box-Details weitergeleitet zu werden. In dieser Ansicht sieht der Benutzer alle Informationen zu dieser speziellen Box, einschließlich der zugewiesenen Pflanzen und Sensoren.
 - Ebenso kann der Benutzer auf den Namen einer Pflanze klicken, um zur detaillierten Pflanzenansicht („Plant View“) weitergeleitet zu werden. Diese zeigt spezifische Informationen zu der Pflanze, wie z. B. den zugewiesenen Sensor und die aktuellen Sensordaten.
 
-**Status-Überprüfung von MQTT und KI-Modell**
+**Status-Überprüfung von MQTT-Kommunikation, KI-Modell und Grafana**
 
-- Auf der rechten oberen Seite des Dashboards befindet sich der „Status“-Button. Durch Klicken darauf wird ein Popup-Fenster geöffnet, das den aktuellen Status der MQTT- und KI-Modelle anzeigt. Diese Information zeigt an, ob die Dienste aktiv auf dem Apache-Webserver laufen.
-- Im Popup wird der Status jedes Dienstes (z. B. „MQTT: aktiv“, „KI-Modell: inaktiv“) in einer Liste angezeigt.
+- Auf der rechten oberen Seite des Dashboards befindet sich der „Status“-Button. Durch Klicken darauf wird ein Popup-Fenster geöffnet, das den aktuellen Status der auf dem RaspberryPi laufenden Services anzeigt (MQTT-Kommunikation, KI-Modell, Grafana) anzeigt. Diese Information zeigt an, ob die Dienste aktiv auf dem RaspberryPi laufen.
+- Im Popup wird der Status jedes Dienstes in einer Liste angezeigt.
 
 **Fehlerbehandlung**
 
