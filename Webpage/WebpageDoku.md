@@ -351,8 +351,6 @@ Die **Box-Details-Seite** bietet dem Benutzer eine detaillierte Übersicht über
   - **Wasser-Volumen**: Das Volumen des Wassers (in ml), das sich aktuell im Tank befindet.
   - **Düngervolumen**: Das Volumen des Düngers (in ml) im Tank.
   - **Säurevolumen**: Das Volumen der Säure (in ml) im Tank.
-- Diese Daten werden in Echtzeit oder nach der letzten Aktualisierung angezeigt, die unter „Last updated“ vermerkt ist.
-- Falls keine Tankdaten vorhanden sind, wird eine Meldung angezeigt, dass keine Informationen verfügbar sind.
 
 **Navigation**
 
