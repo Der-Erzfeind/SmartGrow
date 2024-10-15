@@ -88,6 +88,15 @@ void callback(char* topic, byte* payload, unsigned int length);
 
 void connectWifi(ArduinoJson::JsonDocument &jsonDocument)
 {
+  
+  IPAddress local_IP(10, 42, 0, 100);  // Change to your desired IP
+  IPAddress gateway(10, 42, 0, 1);     // Your router's gateway
+  IPAddress subnet(255, 255, 255, 0);    // Subnet mask
+
+  if (!WiFi.config(local_IP, gateway, subnet)) {
+      Serial.println("STA Failed to configure");
+    }
+
   Serial.println("Connecting to WiFi...");
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
@@ -258,7 +267,7 @@ bool readFloraBatteryCharacteristic(BLERemoteService *floraService, Sensor &sens
 
   // read characteristic value
   Serial.println("- Read value from characteristic");
-  std::string value;
+  std::string value; 
   try
   {
     value = floraCharacteristic->readValue();
@@ -277,7 +286,7 @@ bool readFloraBatteryCharacteristic(BLERemoteService *floraService, Sensor &sens
   return true;
 }
 
-bool readFloraDataCharacteristic(BLERemoteService *floraService, bool readBattery, ArduinoJson::JsonDocument &jsonDocument, Sensor sensor)
+bool readFloraDataCharacteristic(BLERemoteService *floraService, bool readBattery, ArduinoJson::JsonDocument &jsonDocument, Sensor &sensor)
 {
   BLERemoteCharacteristic *floraCharacteristic = nullptr;
 
@@ -395,7 +404,7 @@ bool readFloraDataCharacteristic(BLERemoteService *floraService, bool readBatter
 }
 
 
-bool processFloraService(BLERemoteService *floraService, bool readBattery, ArduinoJson::JsonDocument &jsonDocument, Sensor sensor)
+bool processFloraService(BLERemoteService *floraService, bool readBattery, ArduinoJson::JsonDocument &jsonDocument, Sensor &sensor)
 {
   // set device in data mode
   if (!forceFloraServiceDataMode(floraService))
@@ -541,12 +550,12 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
     sensorArray[i].setMac(sensorData["Mac"]);
     sensorArray[i].setPot(sensorData["Pot"]);
-    sensorArray[i].setMinPh(sensorData["MinPh"]);
-    sensorArray[i].setMaxPh(sensorData["MaxPh"]);
     sensorArray[i].setMinMoisture(sensorData["MinMoisture"]);
     sensorArray[i].setMaxMoisture(sensorData["MaxMoisture"]);
     sensorArray[i].setMinConductivity(sensorData["MinConductivity"]);
     sensorArray[i].setMaxConductivity(sensorData["MaxConductivity"]);
+    sensorArray[i].setMinPh(sensorData["MinPh"]);
+    sensorArray[i].setMaxPh(sensorData["MaxPh"]);
   }
 }
 
@@ -561,7 +570,7 @@ void setup()
   bootCount++;
 
   // create a hibernate task in case something gets stuck
-  //xTaskCreate(delayedHibernate, "hibernate", 4096, NULL, 1, &hibernateTaskHandle);
+  xTaskCreate(delayedHibernate, "hibernate", 4096, NULL, 1, &hibernateTaskHandle);
 
   // initialize hardware
   initHardware();
@@ -603,6 +612,9 @@ void setup()
 
   client.unsubscribe(parameterReceiveTopic.c_str());
 
+  disconnectMqtt();
+  disconnectWifi();
+
   Serial.println("Initialize BLE client...");
   BLEDevice::init("");
   BLEDevice::setPower(ESP_PWR_LVL_P9);
@@ -614,10 +626,10 @@ void setup()
 
     // Add main data
   sensorJson["Mac"] = WiFi.macAddress();
-  sensorJson["volmix"] = 60;
-  sensorJson["volwater"] = 20;
-  sensorJson["volfertilizer"] = 60;
-  sensorJson["volacid"] = 60;
+  //sensorJson["volmix"] = 60;
+  sensorJson["volwater"] = readUltraSonic(PIN_US_WATER_TRIGGER, PIN_US_WATER_ECHO);
+  sensorJson["volfertilizer"] = readUltraSonic(PIN_US_FERTILIZER_TRIGGER, PIN_US_FERTILIZER_ECHO);
+  sensorJson["volacid"] = readUltraSonic(PIN_US_ACID_TRIGGER, PIN_US_ACID_ECHO);
 
   // process devices
   for (int i = 0; i < deviceCount; i++)
@@ -634,28 +646,34 @@ void setup()
       // create sensor topic
       if (processFloraDevice(readBattery, retryCount, sensorJson, sensorArray[i]))
       {
-        if(!calculateMeasurementLevel(sensorArray[i].getmoisture(), sensorArray[i].getMinMoisture(), sensorArray[i].getMaxMoisture())){
+        
+        if(sensorArray[i].getmoisture() <= sensorArray[i].getMinMoisture()){
           if(!addWater(200)){
             Serial.println("adding Water failed!");
             Serial.println("aborting irrigation");
             hibernate();
           }
-          if(!calculateMeasurementLevel(sensorArray[i].getconductivity(), sensorArray[i].getMinConductivity(), sensorArray[i].getMaxConductivity())){
-            if(!addFertilizer(5)){
+          if(sensorArray[i].getconductivity() <= sensorArray[i].getMinConductivity()){
+            if(!addFertilizer(20)){
               Serial.println("adding Fertilizer failed!");
             }
           }
-          if(!correctPH(sensorArray[i].getMinPh())){
+          if(!correctPH(sensorArray[i].getMaxPh())){
             Serial.println("correcting PH failed!");
           }
           waterPlant(sensorArray[i].getPot());
           hibernateAfterIrrigation();
         }
+
+       break;
       }
       delay(3000); // wait for another try
     }
     delay(2000); // wait for next sensor
   }
+
+  connectWifi(deviceJson);
+  connectMqtt();
   
   char payload[sensorCapacity];
   serializeJson(sensorJson, payload);
@@ -674,7 +692,7 @@ void setup()
   disconnectWifi();
 
   // delete emergency hibernate task
-  //vTaskDelete(hibernateTaskHandle);
+  vTaskDelete(hibernateTaskHandle);
 
   // go to sleep now
   hibernate();
