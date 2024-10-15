@@ -173,7 +173,6 @@ bool correctPH(float ph)
     float curr_ph;
     for (int i = 0; i <= 5; i++)
     {
-        delay(1000 * 60 * 10);
         curr_ph = read_PH();
         if (curr_ph <= ph)
             break;
