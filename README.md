@@ -8,3 +8,6 @@ Bei SmartGrow handel es sich um ein automatisiertes System zum Indoor-Kräuteran
 - Webentwicklung: intuitives Dashboard zur Verwaltung der Pflanzen
 - Datenbank: Speicherung von Pflanzeninformationen
 - Künstliche Intelligenz: Pflanzenerkennung
+
+## Projektvorstellung
+
