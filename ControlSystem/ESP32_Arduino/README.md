@@ -23,8 +23,8 @@ __Beachte : Projekt befindet sich im Prototyp Stadium, es können Fehler auftret
 ## Technische Voraussetzungen
 
 Hardware:
-- ESP32 ([ESP32 auf AliExpress](https://nl.aliexpress.com/wholesale?catId=0&initiative_id=SB_20200408062838&SearchText=MH-ET+Live+ESP32))
-- Xiaomi Flora Plant Sensor (firmware revision >= 2.6.6) ([Xiaomi flora auf AliExpress](https://nl.aliexpress.com/wholesale?catId=0&initiative_id=SB_20200408063038&SearchText=xiaomi+flora))
+- ESP32 [ESP32 auf AliExpress](https://www.aliexpress.com/item/1005005626482837.html?spm=a2g0o.order_list.order_list_main.42.133e1802JBKUlo)
+- Xiaomi Flora Plant Sensor ([Xiaomi flora auf AliExpress](https://www.aliexpress.com/item/1005004193994534.html?spm=a2g0o.productlist.main.1.3e86z6Alz6Al3B&algo_pvid=8b2590e4-d1ef-4a2e-8f69-6f2006bd95c3&algo_exp_id=8b2590e4-d1ef-4a2e-8f69-6f2006bd95c3-0&pdp_npi=4%40dis%21EUR%2135.64%2124.59%21%21%2137.97%2126.20%21%40211b807017290070547776773e07c3%2112000028337922699%21sea%21DE%212004505613%21X&curPageLogUid=G1MOItTtKRdY&utparam-url=scene%3Asearch%7Cquery_from%3A))
 
 ![xiaomi-flora](xiaomi-miflora.png)
 
