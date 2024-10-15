@@ -7,6 +7,7 @@ void emergency_shutdown()
 
 void initHardware()
 {
+    // test
     // Configure the ultrasonic sensors
     pinMode(PIN_US_WATER_TRIGGER, OUTPUT);
     pinMode(PIN_US_WATER_ECHO, INPUT);
