@@ -334,7 +334,7 @@ Das Dashboard bietet dem Benutzer eine zentrale Anlaufstelle, um seine Boxen zu 
 
 **Box-Details-Seite**
 
-Die **Box-Details-Seite** bietet dem Benutzer eine detaillierte Übersicht über die Pflanzen, die in der ausgewählten Box untergebracht sind, sowie Informationen über die Füllstände der Tanks in dieser Box. Diese Seite dient zur Verwaltung und Überwachung der einzelnen Pflanzen und der Wasser- und Nährstoffversorgung der Box.
+Die **Box-Details-Seite** bietet dem Benutzer eine detaillierte Übersicht über die Pflanzen, die in der ausgewählten Box untergebracht sind. Des Weiteren ist es vorgesehen hier die Füllstände der Tanks in dieser Box anzuzeigen, was aktuell jedoch hardwareseitig noch nicht umgesetzt ist. Im MQTT-Topic "measurment" ist jedoch schon vorgesehen diese Daten zu empfangen und auch in der Datenbank einzutragen. Die Seite Box_Deatails dient somit zur Verwaltung und Überwachung der einzelnen Pflanzen und der Wasser- und Nährstoffversorgung der Box.
 
 **Pflanzenübersicht**
 
@@ -346,7 +346,7 @@ Die **Box-Details-Seite** bietet dem Benutzer eine detaillierte Übersicht über
 
 **Tankstatus**
 
-- Im unteren Bereich der Box-Details-Seite findet der Benutzer Informationen über den aktuellen Status der Tanks in der Box. Dies umfasst:
+- Im unteren Bereich der Box-Details-Seite soll der Benutzer Informationen über den aktuellen Status der Tanks in der Box finden. Dies muss hardwareseitig noch realisiert werden. Angezeigt werden soll:
   - **Mix-Volumen**: Das Volumen der gemischten Flüssigkeiten (in ml) im Tank.
   - **Wasser-Volumen**: Das Volumen des Wassers (in ml), das sich aktuell im Tank befindet.
   - **Düngervolumen**: Das Volumen des Düngers (in ml) im Tank.
