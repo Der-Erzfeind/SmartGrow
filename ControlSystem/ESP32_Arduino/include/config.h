@@ -1,7 +1,7 @@
 // Device settings
 #define DEVICE_ID "10:06:1C:81:4E:10"       // Identifier of the esp32 device
-#define SLEEP_DURATION 60                   // Sleep between to runs in seconds
-#define EMERGENCY_HIBERNATE 20 * 60         // Emergency hibernate countdown in seconds
+#define SLEEP_DURATION 60 * 60 * 3          // Sleep between to runs in seconds
+#define EMERGENCY_HIBERNATE 20 * 60          // Emergency hibernate countdown in seconds
 #define BATTERY_INTERVAL 1                  // How often should the battery be read - in run count
 #define BATTERY_THRESHOLD_LOW 20            // Battery threshold when battery gets low
 #define BATTERY_THRESHOLD_MED 80            // Battery threshold when battery gets medium
