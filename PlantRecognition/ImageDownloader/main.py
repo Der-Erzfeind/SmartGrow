@@ -79,17 +79,3 @@ elif image_count > desired_images:
     print('Mehr Bilder als gewuenscht')
 else:
     print('Weniger Bilder als gewuenscht')
-
-# Herunterladen der Bilder
-# if 'images_results' not in results:
-#     print('Error keine Bilder')
-# else:
-#     img_name = 0
-#
-#     for result in results['images_results']:
-#
-#         if img_name == desired_images:
-#             break
-#
-#         download_images('C:\\DataSets\\scrapedIMG\\Basil', result['original'], str(img_name + 1))
-#         img_name += 1
