@@ -48,6 +48,7 @@
     bool addWater(int ml);
     bool addFertilizer(int ml);
     bool correctPH(float ph);
+    float analogToPH(int analogVal);
     bool waterPlant(int pumpID);
     String arduinoResponse();
 

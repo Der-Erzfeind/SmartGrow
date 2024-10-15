@@ -111,7 +111,7 @@ float analogToPH(int analogVal){
 
 float read_PH()
 {
-    float pH, diffPH, testPH_arr[10], diffPH_avg;
+    float pH, diffPH, testPH_arr[10], diffPH_avg=0;
     int buffer_arr[9];
 
     while (1)
@@ -123,14 +123,14 @@ float read_PH()
         }
         for (int i = 0; i < 9; i++)
         {
-            diffPH_avg += testPH_arr[i + 1] - testPH_arr[i];
+            diffPH_avg += (testPH_arr[i + 1] - testPH_arr[i]);
         }
         
         diffPH_avg /= 9;
         Serial.printf("average difference: %f\n", diffPH_avg);
 
 
-        if(diffPH_avg < 0.2)
+        if(diffPH_avg < 0.1 && diffPH_avg > -0.1)
             break;
 
         delay(1000 * 60);
@@ -229,7 +229,7 @@ bool waterPlant(int pumpID)
         Serial.println(CMD_PUMP_POT_OFF(pumpID));
         return false;
     } */
-    delay(200 * C_TIME_VOL);
+    delay(220 * C_TIME_VOL);
     // Serial.println(CMD_PUMP_POT_OFF(pumpID));                    //CMD_PUMPx_LOW -> 0x0
     Serial.printf("CMD_PUMP%d_OFF\n", pumpID);
 

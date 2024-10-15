@@ -626,7 +626,7 @@ void setup()
 
     // Add main data
   sensorJson["Mac"] = WiFi.macAddress();
-  //sensorJson["volmix"] = 60;
+  sensorJson["volmix"] = 0;
   sensorJson["volwater"] = readUltraSonic(PIN_US_WATER_TRIGGER, PIN_US_WATER_ECHO);
   sensorJson["volfertilizer"] = readUltraSonic(PIN_US_FERTILIZER_TRIGGER, PIN_US_FERTILIZER_ECHO);
   sensorJson["volacid"] = readUltraSonic(PIN_US_ACID_TRIGGER, PIN_US_ACID_ECHO);
@@ -662,7 +662,6 @@ void setup()
             Serial.println("correcting PH failed!");
           }
           waterPlant(sensorArray[i].getPot());
-          hibernateAfterIrrigation();
         }
 
        break;
