@@ -1,0 +1,985 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "In diesem Dashboard ist die Visualisierung der Messwerte realisiert",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "frser-sqlite-datasource",
+        "uid": "bdvp7nc6wgglcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 3,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Füllstand Säure"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Füllstand Säure"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#9400d3",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "frser-sqlite-datasource",
+            "uid": "bdvp7nc6wgglcb"
+          },
+          "queryText": "SELECT\n  strftime('%s', time, 'utc') as \"time\",\n  volume_acid AS \"Füllstand Säure\"\nFROM\n  Liquid_Tanks\nWHERE\n  boxId = '$boxID'\nORDER BY time ASC;",
+          "queryType": "table",
+          "rawQueryText": "SELECT\n  strftime('%s', time, 'utc') as \"time\",\n  volume_acid AS \"Füllstand Säure\"\nFROM\n  Liquid_Tanks\nWHERE\n  boxId = '$boxID'\nORDER BY time ASC;",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "Säuretank Füllstand",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "frser-sqlite-datasource",
+        "uid": "bdvp7nc6wgglcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 3,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Fuellstand Duenger"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#26a5b8",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Füllstand Dünger"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#39b4aa",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "frser-sqlite-datasource",
+            "uid": "bdvp7nc6wgglcb"
+          },
+          "queryText": "SELECT\n  strftime('%s', time, 'utc') as \"time\",\n  volume_fertilizer AS \"Füllstand Dünger\"\nFROM\n  Liquid_Tanks\nWHERE\n  boxID = '$boxID'\nORDER BY time ASC;",
+          "queryType": "table",
+          "rawQueryText": "SELECT\n  strftime('%s', time, 'utc') as \"time\",\n  volume_fertilizer AS \"Füllstand Dünger\"\nFROM\n  Liquid_Tanks\nWHERE\n  boxID = '$boxID'\nORDER BY time ASC;",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "Düngertank Füllstand",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "frser-sqlite-datasource",
+        "uid": "bdvp7nc6wgglcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 3,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Fuellstand"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "frser-sqlite-datasource",
+            "uid": "bdvp7nc6wgglcb"
+          },
+          "queryText": "SELECT\n  strftime('%s', time, 'utc') as \"time\",\n  volume_water AS \"Fuellstand\"\nFROM\n  Liquid_Tanks\nWHERE\n  boxID = '$boxID'\nORDER BY time ASC;",
+          "queryType": "table",
+          "rawQueryText": "SELECT\n  strftime('%s', time, 'utc') as \"time\",\n  volume_water AS \"Fuellstand\"\nFROM\n  Liquid_Tanks\nWHERE\n  boxID = '$boxID'\nORDER BY time ASC;",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "Wassertank Füllstand",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "frser-sqlite-datasource",
+        "uid": "bdvp7nc6wgglcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "purple",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 3,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "μS/cm"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Maximaler Bodenleitwert"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#70707099",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Minimaler Bodenleitwert"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#70707099",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "frser-sqlite-datasource",
+            "uid": "bdvhshmt1sbuof"
+          },
+          "queryText": "SELECT \n  strftime('%s', time, 'utc') as \"time\",\n  soil_ec AS \"Bodenleitwert\",\n  (SELECT max_soil_ec FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Maximaler Bodenleitwert\",\n  (SELECT min_soil_ec FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Minimaler Bodenleitwert\"\nFROM\n  Measurements\nWHERE\n  SensorMac = '$sensorID'\nORDER BY time ASC;",
+          "queryType": "table",
+          "rawQueryText": "SELECT \n  strftime('%s', time, 'utc') as \"time\",\n  soil_ec AS \"Bodenleitwert\",\n  (SELECT max_soil_ec FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Maximaler Bodenleitwert\",\n  (SELECT min_soil_ec FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Minimaler Bodenleitwert\"\nFROM\n  Measurements\nWHERE\n  SensorMac = '$sensorID'\nORDER BY time ASC;",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "Bodenleitwert",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "frser-sqlite-datasource",
+        "uid": "bdvp7nc6wgglcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 3,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "lux"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Maximiale Lichtintensität"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#70707099",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Minimale Lichtintensität"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#70707099",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 32
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "frser-sqlite-datasource",
+            "uid": "bdvhshmt1sbuof"
+          },
+          "queryText": "SELECT\n  strftime('%s', time, 'utc') as \"time\",\n  light_lux AS \"Lichtintensität\",\n  (SELECT max_light_lux FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Maximiale Lichtintensität\",\n  (SELECT min_light_lux FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Minimale Lichtintensität\"\nFROM\n  Measurements\nWHERE\n  SensorMac='$sensorID'\nORDER BY time ASC;",
+          "queryType": "table",
+          "rawQueryText": "SELECT\n  strftime('%s', time, 'utc') as \"time\",\n  light_lux AS \"Lichtintensität\",\n  (SELECT max_light_lux FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Maximiale Lichtintensität\",\n  (SELECT min_light_lux FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Minimale Lichtintensität\"\nFROM\n  Measurements\nWHERE\n  SensorMac='$sensorID'\nORDER BY time ASC;",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "Lichtintensität",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "frser-sqlite-datasource",
+        "uid": "bdvp7nc6wgglcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 3,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Maximale Bodenfeuchtigkeit"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#70707099",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Minimale Bodenfeuchtigkeit"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#70707099",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 40
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "frser-sqlite-datasource",
+            "uid": "bdvhshmt1sbuof"
+          },
+          "queryText": "SELECT\n  strftime('%s', time, 'utc') as \"time\",\n  soil_moist AS \"Bodenfeuchtigkeit\",\n  (SELECT max_soil_moist FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Maximale Bodenfeuchtigkeit\",\n  (SELECT min_soil_moist FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Minimale Bodenfeuchtigkeit\"\nFROM \n  Measurements\nWHERE \n  SensorMac='$sensorID'\nORDER BY time ASC;\n",
+          "queryType": "table",
+          "rawQueryText": "SELECT\n  strftime('%s', time, 'utc') as \"time\",\n  soil_moist AS \"Bodenfeuchtigkeit\",\n  (SELECT max_soil_moist FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Maximale Bodenfeuchtigkeit\",\n  (SELECT min_soil_moist FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Minimale Bodenfeuchtigkeit\"\nFROM \n  Measurements\nWHERE \n  SensorMac='$sensorID'\nORDER BY time ASC;\n",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "Bodenfeuchtigkeit",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "frser-sqlite-datasource",
+        "uid": "bdvp7nc6wgglcb"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-orange",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 3,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Maximale Temperatur"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#70707099",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Minimale Temperatur"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#70707099",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 48
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "frser-sqlite-datasource",
+            "uid": "bdvhshmt1sbuof"
+          },
+          "queryText": "SELECT\n  strftime('%s', time, 'utc') as \"time\",\n  temp AS \"Temperatur\",\n  (SELECT max_temp FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Maximale Temperatur\",\n  (SELECT min_temp FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Minimale Temperatur\"\nFROM\n  Measurements\nWHERE\n  SensorMac = '$sensorID'\nORDER BY\n  time ASC",
+          "queryType": "table",
+          "rawQueryText": "SELECT\n  strftime('%s', time, 'utc') as \"time\",\n  temp AS \"Temperatur\",\n  (SELECT max_temp FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Maximale Temperatur\",\n  (SELECT min_temp FROM HerbsDb_Plants_Compare_Value WHERE pid = '$pid') AS \"Minimale Temperatur\"\nFROM\n  Measurements\nWHERE\n  SensorMac = '$sensorID'\nORDER BY\n  time ASC",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "Lufttemperatur",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "5C:85:7E:12:C6:B8",
+          "value": "5C:85:7E:12:C6:B8"
+        },
+        "datasource": {
+          "type": "frser-sqlite-datasource",
+          "uid": "bdvp7nc6wgglcb"
+        },
+        "definition": "SELECT DISTINCT SensorMAC AS __value FROM Measurements\n",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "sensorID",
+        "options": [],
+        "query": "SELECT DISTINCT SensorMAC AS __value FROM Measurements\n",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "Arugula",
+          "value": "Arugula"
+        },
+        "datasource": {
+          "type": "frser-sqlite-datasource",
+          "uid": "bdvp7nc6wgglcb"
+        },
+        "definition": "SELECT pid FROM HerbsDb_Plants_Compare_Value",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "pid",
+        "options": [],
+        "query": "SELECT pid FROM HerbsDb_Plants_Compare_Value",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "isNone": true,
+          "selected": false,
+          "text": "None",
+          "value": ""
+        },
+        "datasource": {
+          "type": "frser-sqlite-datasource",
+          "uid": "bdvp7nc6wgglcb"
+        },
+        "definition": "SELECT DISTINCT boxID FROM Liquid_Tanks",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "boxID",
+        "options": [],
+        "query": "SELECT DISTINCT boxID FROM Liquid_Tanks",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "2022-12-31T23:00:00.000Z",
+    "to": "2023-01-01T08:00:00.000Z"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Smartgrow_Grafana_Dashboard",
+  "uid": "advi5em73o5c0a",
+  "version": 15,
+  "weekStart": ""
+}
