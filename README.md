@@ -10,4 +10,4 @@ Bei SmartGrow handel es sich um ein automatisiertes System zum Indoor-Kräuteran
 - Künstliche Intelligenz: Pflanzenerkennung
 
 ## Projektvorstellung
-
+![SmartGrow -Plakat](SmartGrow_Plakat.png)
