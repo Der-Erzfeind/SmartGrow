@@ -7,7 +7,6 @@ void emergency_shutdown()
 
 void initHardware()
 {
-    // test
     // Configure the ultrasonic sensors
     pinMode(PIN_US_WATER_TRIGGER, OUTPUT);
     pinMode(PIN_US_WATER_ECHO, INPUT);
@@ -75,13 +74,39 @@ float findMedian(int arr[], int n)
 }
 
 float analogToPH(int analogVal){
-    float calibration_value = 0.15;
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*\
+     * Es besteht linearer Zusammenhanfg zwischen Sensor Ausgangsspannung pO und pH-Wert
+     * Hierfür gilt folgende Formel: pH = m * volt_pO + b
+     * Zur Bestimmung der Parmeter m und b wurde die Spannung pO in zwei Lösungen mit bekannten pH-Werten 7 und 5 gemessen
+     * 
+     * Durch Ausführung des Programms auf ESP muss ein Spannungsteiler vorgeschaltet werden da die maximale Ausgangsspannung des Sensors 5 V beträgt
+     * Über Spannungsteiler ist die maximale Spannung auf 3,2 V begrenzt
+     * 
+     * Der Sensor kann über ein Potentiometer so kalibriert werden das pH 7 die Hälfte des Spannungsbereichs beträgt also 2,5 V bzw. nach Spannungsteiler 1,6 V
+     * 
+     * Für eine Lösung mit pH = 10 ergab sich eine Spannung von 1,20 V
+     * Für eine Lösung mit pH = 5 ergab sich eine Spannung von 1,79 V
+     * 
+     * Mit diesen Messwerten kann zunächst Parameter m bestimmt werden
+     * m = (pH10 - pH5) / (volt_pH10 - volt_pH5) = (10 - 5) / (1,20 V - 1,79 V) = -8,47 [pH/V]
+     * 
+     * Anschließend kann Parameter b bestimmt werden:
+     * b = pH5 - m * volt_pH5 = 20,16
 
-    float voltage = analogVal * (3.0 / 4095.0) + calibration_value;
-    // Berechnung PH
-    //   pH = 7 + (voltage-1.5)*(4-7)/(1.7-1.5);
+     * Nun können über die Formel pH = m * volt_pO + b neue pH-Werte über die Spannung pO vom Sensor bestimmt werden.
+     * Der Sensor ist leider nicht sehr genau und auch sehr empfindlich. Er braucht eine Weile in der Lösung bis er einen stabilen Wert hat
+    \*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-    return ((0.07 * 7 - voltage + 1.5) / 0.07) ;
+    // Definition der Funktionsparameter Siehe Funktionsbeschreibung oben 
+    float m = -8.47;
+    float b = 20.16;
+    float pH;
+    
+    float voltage = analogVal * (3.2 / 4095.0);     // 3,2 V gleich maximal Spannung am Sensor-Ausgang und 4095 entspricht Auflösung des ADC
+
+    pH = m * voltage + b;
+
+    return (pH) ;
 }
 
 float read_PH()
